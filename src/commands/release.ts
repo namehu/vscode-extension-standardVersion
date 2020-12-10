@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
-import { exec, ExecOptions } from 'child_process';
-import { resolve } from 'path';
+import * as path from 'path';
+import * as fs from 'fs';
+import { exec } from 'child_process';
 import { outputChannel } from '../tools/outputchannel';
 
 export default async function release(workspacePath: string, push = false) {
@@ -49,7 +50,22 @@ export default async function release(workspacePath: string, push = false) {
     }
   ];
 
-  const item = await vscode.window.showQuickPick(quickPickItems);
+  const packagePath = path.resolve(workspacePath, './package.json');
+
+  let placeHolder = '请选择一个发布命令';
+  try {
+    const stat = fs.statSync(packagePath);
+    if (stat.isFile()) {
+      const { version } = JSON.parse(fs.readFileSync(packagePath).toString());
+      if (version) {
+        placeHolder += ` 当前版本为: v${version}`;
+      }
+    }
+  } catch (error) {
+
+  }
+
+  const item = await vscode.window.showQuickPick(quickPickItems, { placeHolder });
 
   if (!item) {
     return;

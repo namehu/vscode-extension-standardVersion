@@ -95,7 +95,7 @@ export default async function release(workspacePath: string, push = false) {
   let pushCommad = '';
   const info = stdout.replace(/ℹ Run \`(git push --follow-tags origin .+)\` to publish/gm, (m, p) => {
     if (push) {
-      pushCommad = p;
+      pushCommad = p.replace(/&& npm publish/, '');
       return '';
     }
     return m;

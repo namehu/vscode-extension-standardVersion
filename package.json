@@ -3,12 +3,17 @@
 	"displayName": "standardVersion",
 	"description": "",
 	"version": "0.0.1",
+	"publisher": "namehu",
 	"engines": {
 		"vscode": "^1.40.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/namehu/vscode-extension-standardVersion"
+	},
 	"activationEvents": [
 		"onCommand:standardversion.helloWorld",
 		"onCommand:standardversion.release",
@@ -42,7 +47,7 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.51.0",
+		"@types/vscode": "^1.40.0",
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^7.0.2",
 		"@types/node": "^13.11.0",
